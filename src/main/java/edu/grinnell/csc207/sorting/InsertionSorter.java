@@ -55,6 +55,14 @@ public class InsertionSorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    // STUB
+    for (int i = 0; i < values.length; i++) {
+      T current = values[i];
+      int backCount = i - 1;
+      while (backCount >= 0 && this.order.compare(current, values[backCount]) < 0) {
+        values[backCount + 1] = values[backCount];
+        backCount--;
+      }
+      values[backCount + 1] = current;  
+    }
   } // sort(T[])
 } // class InsertionSorter
