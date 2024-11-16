@@ -8,6 +8,7 @@ import java.util.Comparator;
  * @param <T> The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author A.J. Trimble
  */
 public class MergeSorter<T> implements Sorter<T> {
     // +--------+------------------------------------------------------

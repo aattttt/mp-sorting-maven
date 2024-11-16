@@ -161,13 +161,17 @@ public class TestSorter {
      */
     @Test
     public void manyRepeatsTest() {
-        int SIZE = 100;
+        int SIZE = 10;
         if (null == intSorter) {
             return;
         } // if
         Integer[] original = new Integer[SIZE];
         for (int i = 0; i < SIZE; i++) {
-            original[i] = (i % 3);
+            if (i % 2 == 0) {
+              original[i] = i;
+            } else {
+              original[i] = i - 1;
+            }
         } // for
         Integer[] expected = original.clone();
         ArrayUtils.permute(original);

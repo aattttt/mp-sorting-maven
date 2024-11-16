@@ -9,6 +9,7 @@ import java.util.Comparator;
  *   The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author A.J. Trimble
  */
 
 public class SelectionSorter<T> implements Sorter<T> {
@@ -55,6 +56,21 @@ public class SelectionSorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    // STUB
+    if (values.length != 0) {
+      T temp;
+      for (int i = 0; i < values.length; i++) {
+        int min = i;
+        for (int j = i + 1; j < values.length; j++) {
+          if (this.order.compare(values[j], values[min]) < 0) {
+              min = j;
+          }
+        }
+        if (min != i) {
+          temp = values[i];
+          values[i] = values[min];
+          values[min] = temp;
+        }
+      }
+    }
   } // sort(T[])
 } // class SelectionSorter

@@ -9,6 +9,7 @@ import java.util.Comparator;
  *   The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author A.J. Trimble
  */
 
 public class InsertionSorter<T> implements Sorter<T> {
@@ -61,8 +62,8 @@ public class InsertionSorter<T> implements Sorter<T> {
       while (backCount >= 0 && this.order.compare(current, values[backCount]) < 0) {
         values[backCount + 1] = values[backCount];
         backCount--;
-      }
-      values[backCount + 1] = current;  
-    }
+      } // while
+      values[backCount + 1] = current;
+    } // for
   } // sort(T[])
 } // class InsertionSorter

@@ -1,16 +1,17 @@
 package edu.grinnell.csc207.sorting;
 
 import java.util.Comparator;
+import java.util.Random;
 
 /**
- * Something that sorts using Quicksort.
+ * Something that sorts using Quicksort with a hopefully better pivot on average.
  *
  * @param <T> The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
  * @author A.J. Trimble
  */
-public class Quicksorter<T> implements Sorter<T> {
+public class Quickersorter<T> implements Sorter<T> {
     // +--------+------------------------------------------------------
     // | Fields |
     // +--------+
@@ -29,7 +30,7 @@ public class Quicksorter<T> implements Sorter<T> {
      * @param comparator The order in which elements in the array should be
      * ordered after sorting.
      */
-    public Quicksorter(Comparator<? super T> comparator) {
+    public Quickersorter(Comparator<? super T> comparator) {
         this.order = comparator;
     } // Quicksorter(Comparator)
 
@@ -63,8 +64,32 @@ public class Quicksorter<T> implements Sorter<T> {
         recursiveBody(values, sections[1], ub);
     } // divider(T[], int, int)
 
+    public int getPivot(T[] values, int lb, int ub) {
+        int length = ub - lb;
+        if (length > 2) {
+            Random random = new Random();
+            int first = random.nextInt(length);
+            int second = random.nextInt(length);
+            int third = random.nextInt(length);
+            int firstSecond = this.order.compare(values[first], values[second]);
+            int firstThird = this.order.compare(values[first], values[third]);
+            int secondThird = this.order.compare(values[second], values[third]);
+
+            if ((firstSecond >= 0 && firstThird <= 0) || (firstSecond <= 0 && firstThird >= 0)) {
+                return first;
+            }
+            if ((firstSecond <= 0 && secondThird <= 0) || (firstSecond >= 0 && firstThird <= 0)) {
+                return second;
+            }
+            if ((secondThird <= 0 && firstThird >= 0) || (secondThird >= 0 && firstThird <= 0)) {
+                return third;
+            }
+        }
+        return lb + ((ub - lb) / 2);
+    } // getPivot(T[], int, int)
+
     public int[] Quicksort(T[] values, int lb, int ub) {
-        T pivot = values[lb + ((ub - lb) / 2)];
+        T pivot = values[getPivot(values, lb, ub)];
         int current = lb;
         while (current < ub) {
             if (this.order.compare(values[current], pivot) < 0) {
