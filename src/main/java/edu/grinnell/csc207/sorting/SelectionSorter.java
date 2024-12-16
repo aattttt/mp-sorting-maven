@@ -73,8 +73,8 @@ public class SelectionSorter<T> implements Sorter<T> {
         for (int i = start + 1; i < values.length; i++) {
             if (this.order.compare(values[i], values[smallest]) < 0) {
                 smallest = i;
-            }
-        }
+            } // if
+        } // for
         return smallest;
     } // selectSmallest(T[], int)
 } // class SelectionSorter
