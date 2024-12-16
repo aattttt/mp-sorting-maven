@@ -50,20 +50,20 @@ public class Quicksorter<T> implements Sorter<T> {
     public void sort(T[] values) {
         if (values.length == 0) {
             return;
-        }
+        } // if
         recursiveBody(values, 0, values.length);
     } // sort(T[])
 
-    public void recursiveBody(T[] values, int lb, int ub) {
+    private void recursiveBody(T[] values, int lb, int ub) {
         if ((ub - lb) <= 1) {
             return;
-        }
-        int[] sections = Quicksort(values, lb, ub);
+        } // if
+        int[] sections = partition(values, lb, ub);
         recursiveBody(values, lb, sections[0]);
         recursiveBody(values, sections[1], ub);
-    } // divider(T[], int, int)
+    } // recursiveBody(T[], int, int)
 
-    public int[] Quicksort(T[] values, int lb, int ub) {
+    private int[] partition(T[] values, int lb, int ub) {
         T pivot = values[lb + ((ub - lb) / 2)];
         int current = lb;
         while (current < ub) {
@@ -80,8 +80,8 @@ public class Quicksorter<T> implements Sorter<T> {
                 values[ub] = temp;
             } else {
                 current++;
-            }
-        }
+            } // else
+        } // while
         return new int[]{lb, ub};
-    } // Quicksort(T[], int, int)
+    } // partition(T[], int, int)
 } // class Quicksorter
