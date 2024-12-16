@@ -50,21 +50,21 @@ public class MergeSorter<T> implements Sorter<T> {
     public void sort(T[] values) {
         if (values.length <= 1) {
             return;
-        }
+        } // if
         int midpoint = values.length / 2;
         T[] leftside = (T[]) new Object[midpoint];
         T[] rightside = (T[]) new Object[values.length - midpoint];
         for (int i = 0; i < midpoint; i++) {
             leftside[i] = values[i];
             rightside[i] = values[i + midpoint];
-        }
+        } // for
         if (values.length % 2 != 0) {
             rightside[midpoint] = values[values.length - 1];
-        }
+        } // if
         sort(leftside);
         sort(rightside);
         merge(leftside, rightside, values);
-    }
+    } // sort(T[])
 
     public void merge(T[] leftside, T[] rightside, T[] values) {
         int leftsideIndex = 0;
@@ -79,13 +79,13 @@ public class MergeSorter<T> implements Sorter<T> {
             } else {
                 values[mergedIndex] = rightElement;
                 rightsideIndex++;
-            }
+            } //else
             mergedIndex++;
-        }
+        } // while
         if (leftsideIndex < leftside.length) {
             System.arraycopy(leftside, leftsideIndex, values, mergedIndex, leftside.length - leftsideIndex);
         } else if (rightsideIndex < rightside.length) {
             System.arraycopy(rightside, rightsideIndex, values, mergedIndex, rightside.length - rightsideIndex);
-        }
-    }
+        } // else
+    } // merge(T[], T[], T[])
 } // class MergeSorter
