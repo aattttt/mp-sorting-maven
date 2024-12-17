@@ -88,22 +88,15 @@ public class TrimbleAJSorter<T> implements Sorter<T> {
     int length = ub - lb;
     if (length > 2) {
       Random random = new Random();
-      int first = random.nextInt(length);
-      int second = random.nextInt(length);
-      int third = random.nextInt(length);
-      int firstSecond = this.order.compare(values[first], values[second]);
-      int firstThird = this.order.compare(values[first], values[third]);
-      int secondThird = this.order.compare(values[second], values[third]);
+      int first = lb + random.nextInt(length);
+      int second = lb + random.nextInt(length);
+      int third = lb + random.nextInt(length);
 
-      if ((firstSecond >= 0 && firstThird <= 0) || (firstSecond <= 0 && firstThird >= 0)) {
-        return first;
-      } // if
-      if ((firstSecond <= 0 && secondThird <= 0) || (firstSecond >= 0 && firstThird <= 0)) {
-        return second;
-      } // if
-      if ((secondThird <= 0 && firstThird >= 0) || (secondThird >= 0 && firstThird <= 0)) {
-        return third;
-      } // if
+      int min = Math.min(first, Math.min(second, third));
+      int max = Math.max(first, Math.max(second, third));
+      int median = first + second + third - min - max;
+
+      return median;
     } // if
     return lb + ((ub - lb) / 2);
   } // getPivot(T[], int, int)
