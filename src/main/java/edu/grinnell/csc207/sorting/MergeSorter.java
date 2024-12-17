@@ -47,23 +47,23 @@ public class MergeSorter<T> implements Sorter<T> {
    *       values[i]) &lt;= 0
    */
   @Override
-  public void sort(T[] values) { 
+  public void sort(T[] values) {
     if (values.length <= 1) {
       return;
     } // if
     @SuppressWarnings("unchecked")
     T[] helper = (T[]) new Object[values.length];
-    System.arraycopy(values, 0, helper, 0,values.length);
+    System.arraycopy(values, 0, helper, 0, values.length);
     recursiveBody(0, values.length - 1, helper, values);
   } // sort(T[])
-
 
   /**
    * Sort an array in place using recusion.
    *
-   * @param lb upper bound of the sub array.
-   * @param ub upper bound of the sub array.
-   * @param helper a helper array where sorting will happen before changes are coppied to values.
+   * @param lb     upper bound of the sub array.
+   * @param ub     upper bound of the sub array.
+   * @param helper a helper array where sorting will happen before changes are
+   *               coppied to values.
    * @param values an array to sort.
    *
    * @post The array has been sorted according to some order (often one given
@@ -83,23 +83,25 @@ public class MergeSorter<T> implements Sorter<T> {
     merge(lb, midpoint, ub, helper, values);
   } // recursiveBody(int, int, T[], T[])
 
-    /**
+  /**
    * Sort an array in place using recusion.
    *
-   * @param lb upper bound of the sub array.
-   * @param lb midpoint of the sub array.
-   * @param ub upper bound of the sub array.
-   * @param helper a helper array where sorting will happen before changes are coppied to values.
+   * @param lb     upper bound of the sub array.
+   * @param midpoint     midpoint of the sub array.
+   * @param ub     upper bound of the sub array.
+   * @param helper a helper array where sorting will happen before changes are
+   *               coppied to values.
    * @param values an array to sort.
    *
-   * @post The elements in the range given will be sorted and coppied to the values array
+   * @post The elements in the range given will be sorted and coppied to the
+   *       values array
    */
-  private void merge(int lb, int midpoint, int ub, T[] helper, T[]values) {
+  private void merge(int lb, int midpoint, int ub, T[] helper, T[] values) {
     System.arraycopy(values, lb, helper, lb, ub - lb + 1);
     int mergedIndex = lb;
     int leftsideIndex = lb;
     int rightsideIndex = midpoint + 1;
-    
+
     while (leftsideIndex <= midpoint && rightsideIndex <= ub) {
       T leftElement = helper[leftsideIndex];
       T rightElement = helper[rightsideIndex];
@@ -118,4 +120,3 @@ public class MergeSorter<T> implements Sorter<T> {
     } // if
   } // merge(int, int, int, T[], T[])
 } // class MergeSorter
-
