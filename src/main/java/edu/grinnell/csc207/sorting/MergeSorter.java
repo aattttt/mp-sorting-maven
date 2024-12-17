@@ -46,7 +46,7 @@ public class MergeSorter<T> implements Sorter<T> {
    * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1],
    *       values[i]) &lt;= 0
    */
-  @Override
+  /*@Override
   public void sort(T[] values) {
     if (values.length <= 1) {
       return;
@@ -64,7 +64,40 @@ public class MergeSorter<T> implements Sorter<T> {
     sort(leftside);
     sort(rightside);
     merge(leftside, rightside, values);
-  } // sort(T[])
+  } // sort(T[]) */
+
+
+    /**
+   * Sort an array in place using merge sort.
+   *
+   * @param values an array to sort.
+   *
+   * @post The array has been sorted according to some order (often one given
+   *       to the constructor).
+   * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1],
+   *       values[i]) &lt;= 0
+   */
+  @Override
+  public void sort(T[] values) { 
+    if (values.length <= 1) {
+      return;
+    } // if
+    T[] helper = (T[]) new Object[values.length];
+    recursiveBody(0, values.length - 1, helper, values);
+  }
+
+
+  private void recursiveBody(int lb, int ub, T[] helper, T[] values) {
+    // base case
+    if (lb >= ub) {
+      return;
+    }
+    // recusive case
+    int midpoint = (lb + ub) / 2;
+    recursiveBody(lb, midpoint, helper, values);
+    recursiveBody(midpoint, ub + 1, helper, values);
+    //merge(leftside, rightside, values);
+  }
 
   /**
    * Merge two sub-arrays into a sorted array.
@@ -75,7 +108,7 @@ public class MergeSorter<T> implements Sorter<T> {
    *
    * @param values    an array into which the sub arrays values will be placed.
    *
-   */
+   
   public void merge(T[] leftside, T[] rightside, T[] values) {
     int leftsideIndex = 0;
     int rightsideIndex = 0;
@@ -100,4 +133,6 @@ public class MergeSorter<T> implements Sorter<T> {
           mergedIndex, rightside.length - rightsideIndex);
     } // else
   } // merge(T[], T[], T[])
+
+  */
 } // class MergeSorter

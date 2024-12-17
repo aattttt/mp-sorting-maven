@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Samuel A. Rebelsky
  * @author A.J. Trimble
  */
-public class Quickersorter<T> implements Sorter<T> {
+public class TrimbleAJSorter<T> implements Sorter<T> {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
@@ -31,7 +31,7 @@ public class Quickersorter<T> implements Sorter<T> {
    * @param comparator The order in which elements in the array should be
    *                   ordered after sorting.
    */
-  public quickersorter(Comparator<? super T> comparator) {
+  public TrimbleAJSorter(Comparator<? super T> comparator) {
     this.order = comparator;
   } // quicksorter(Comparator)
 

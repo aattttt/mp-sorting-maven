@@ -5,14 +5,14 @@ import org.junit.jupiter.api.BeforeAll;
 /**
  * Tests of our Quickersorter.
  */
-public class TestQuickersorter extends TestSorter {
+public class TestTrimbleAJSorter extends TestSorter {
   /**
    * Set up the sorters.
    */
   @BeforeAll
   static void setup() {
-    stringSorter = new Quickersorter<String>((x,y) -> x.compareTo(y));
-    intSorter = new Quickersorter<Integer>((x,y) -> x.compareTo(y));
+    stringSorter = new TrimbleAJSorter<String>((x,y) -> x.compareTo(y));
+    intSorter = new TrimbleAJSorter<Integer>((x,y) -> x.compareTo(y));
   } // setup()
 
 } // class TestQuicksorter
