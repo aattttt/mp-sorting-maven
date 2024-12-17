@@ -84,7 +84,7 @@ public class TrimbleAJSorter<T> implements Sorter<T> {
    *
    * @return The index of the pivot found.
    */
-  public int getPivot(T[] values, int lb, int ub) {
+  private int getPivot(T[] values, int lb, int ub) {
     int length = ub - lb;
     if (length > 2) {
       Random random = new Random();
@@ -118,7 +118,7 @@ public class TrimbleAJSorter<T> implements Sorter<T> {
    * @return an array of two ints which corispind to the lower and upper bounds
    *         of the partitions in the array.
    */
-  public int[] quicksort(T[] values, int lb, int ub) {
+  private int[] quicksort(T[] values, int lb, int ub) {
     T pivot = values[getPivot(values, lb, ub)];
     int current = lb;
     while (current < ub) {

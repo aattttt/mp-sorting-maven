@@ -55,21 +55,47 @@ public class MergeSorter<T> implements Sorter<T> {
     T[] helper = (T[]) new Object[values.length];
     System.arraycopy(values, 0, helper, 0,values.length);
     recursiveBody(0, values.length - 1, helper, values);
-  }
+  } // sort(T[])
 
+
+  /**
+   * Sort an array in place using recusion.
+   *
+   * @param lb upper bound of the sub array.
+   * @param ub upper bound of the sub array.
+   * @param helper a helper array where sorting will happen before changes are coppied to values.
+   * @param values an array to sort.
+   *
+   * @post The array has been sorted according to some order (often one given
+   *       to the constructor).
+   * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1],
+   *       values[i]) &lt;= 0
+   */
   private void recursiveBody(int lb, int ub, T[] helper, T[] values) {
     // base case
     if (lb >= ub) {
       return;
-    }
+    } // if
     // recusive case
     int midpoint = (lb + ub) / 2;
     recursiveBody(lb, midpoint, helper, values);
     recursiveBody(midpoint + 1, ub, helper, values);
     merge(lb, midpoint, ub, helper, values);
-  }
+  } // recursiveBody(int, int, T[], T[])
 
+    /**
+   * Sort an array in place using recusion.
+   *
+   * @param lb upper bound of the sub array.
+   * @param lb midpoint of the sub array.
+   * @param ub upper bound of the sub array.
+   * @param helper a helper array where sorting will happen before changes are coppied to values.
+   * @param values an array to sort.
+   *
+   * @post The elements in the range given will be sorted and coppied to the values array
+   */
   private void merge(int lb, int midpoint, int ub, T[] helper, T[]values) {
+    System.arraycopy(values, lb, helper, lb, ub - lb + 1);
     int mergedIndex = lb;
     int leftsideIndex = lb;
     int rightsideIndex = midpoint + 1;
@@ -89,10 +115,7 @@ public class MergeSorter<T> implements Sorter<T> {
     if (leftsideIndex <= midpoint) {
       System.arraycopy(helper, leftsideIndex, values,
           mergedIndex, midpoint - leftsideIndex + 1);
-    } else if (rightsideIndex <= ub) {
-      System.arraycopy(helper, rightsideIndex, values,
-          mergedIndex, ub - rightsideIndex + 1);
-    } // else
-  } 
+    } // if
+  } // merge(int, int, int, T[], T[])
 } // class MergeSorter
 
