@@ -190,4 +190,24 @@ public class TestSorter {
         String[] expected = {"Hang Loose"};
         assertSorts(expected, original, stringSorter);
     } // sigletonTest
+
+
+    /**
+     * Ensure that the first 1000 combinations of number are handled properly.
+     */
+    @Test
+    public void firstThousandTest() {
+        for (int x = 0; x < 10; x++) {
+          for (int y = 0; y < 10; y++) {
+            for (int z = 0; z < 10; z++) {
+              int a = Math.min(x, Math.min(y, z));
+              int c = Math.max(x, Math.max(y, z));
+              int b = x + y + z - a - c;
+              Integer[] expected = {a, b, c};
+              Integer[] original = {x, y, z};
+              assertSorts(expected, original, intSorter);
+            } // for
+          } // for  
+        } // for
+    } // firstThousandTest
 } // class TestSorter
