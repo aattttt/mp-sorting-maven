@@ -46,46 +46,16 @@ public class MergeSorter<T> implements Sorter<T> {
    * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1],
    *       values[i]) &lt;= 0
    */
-  /*@Override
-  public void sort(T[] values) {
-    if (values.length <= 1) {
-      return;
-    } // if
-    int midpoint = values.length / 2;
-    T[] leftside = (T[]) new Object[midpoint];
-    T[] rightside = (T[]) new Object[values.length - midpoint];
-    for (int i = 0; i < midpoint; i++) {
-      leftside[i] = values[i];
-      rightside[i] = values[i + midpoint];
-    } // for
-    if (values.length % 2 != 0) {
-      rightside[midpoint] = values[values.length - 1];
-    } // if
-    sort(leftside);
-    sort(rightside);
-    merge(leftside, rightside, values);
-  } // sort(T[]) */
-
-
-    /**
-   * Sort an array in place using merge sort.
-   *
-   * @param values an array to sort.
-   *
-   * @post The array has been sorted according to some order (often one given
-   *       to the constructor).
-   * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1],
-   *       values[i]) &lt;= 0
-   */
   @Override
   public void sort(T[] values) { 
     if (values.length <= 1) {
       return;
     } // if
+    @SuppressWarnings("unchecked")
     T[] helper = (T[]) new Object[values.length];
+    System.arraycopy(values, 0, helper, 0,values.length);
     recursiveBody(0, values.length - 1, helper, values);
   }
-
 
   private void recursiveBody(int lb, int ub, T[] helper, T[] values) {
     // base case
@@ -95,27 +65,18 @@ public class MergeSorter<T> implements Sorter<T> {
     // recusive case
     int midpoint = (lb + ub) / 2;
     recursiveBody(lb, midpoint, helper, values);
-    recursiveBody(midpoint, ub + 1, helper, values);
-    //merge(leftside, rightside, values);
+    recursiveBody(midpoint + 1, ub, helper, values);
+    merge(lb, midpoint, ub, helper, values);
   }
 
-  /**
-   * Merge two sub-arrays into a sorted array.
-   *
-   * @param leftside  one smaller sorted array.
-   *
-   * @param rightside one smaller sorted array.
-   *
-   * @param values    an array into which the sub arrays values will be placed.
-   *
-   
-  public void merge(T[] leftside, T[] rightside, T[] values) {
-    int leftsideIndex = 0;
-    int rightsideIndex = 0;
-    int mergedIndex = 0;
-    while (leftsideIndex < leftside.length && rightsideIndex < rightside.length) {
-      T leftElement = leftside[leftsideIndex];
-      T rightElement = rightside[rightsideIndex];
+  private void merge(int lb, int midpoint, int ub, T[] helper, T[]values) {
+    int mergedIndex = lb;
+    int leftsideIndex = lb;
+    int rightsideIndex = midpoint + 1;
+    
+    while (leftsideIndex <= midpoint && rightsideIndex <= ub) {
+      T leftElement = helper[leftsideIndex];
+      T rightElement = helper[rightsideIndex];
       if (order.compare(leftElement, rightElement) <= 0) {
         values[mergedIndex] = leftElement;
         leftsideIndex++;
@@ -125,14 +86,13 @@ public class MergeSorter<T> implements Sorter<T> {
       } // else
       mergedIndex++;
     } // while
-    if (leftsideIndex < leftside.length) {
-      System.arraycopy(leftside, leftsideIndex, values,
-          mergedIndex, leftside.length - leftsideIndex);
-    } else if (rightsideIndex < rightside.length) {
-      System.arraycopy(rightside, rightsideIndex, values,
-          mergedIndex, rightside.length - rightsideIndex);
+    if (leftsideIndex <= midpoint) {
+      System.arraycopy(helper, leftsideIndex, values,
+          mergedIndex, midpoint - leftsideIndex + 1);
+    } else if (rightsideIndex <= ub) {
+      System.arraycopy(helper, rightsideIndex, values,
+          mergedIndex, ub - rightsideIndex + 1);
     } // else
-  } // merge(T[], T[], T[])
-
-  */
+  } 
 } // class MergeSorter
+
