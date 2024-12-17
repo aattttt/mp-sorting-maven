@@ -159,7 +159,7 @@ public class SortTools {
 
     // Array of identical values.
     int size = 70;
-    // if (pen != null) { pen.println("  Sorting identical array."); } 
+    // if (pen != null) { pen.println("  Sorting identical array."); }
     strings = new String[size];
     for (int i = 0; i < 70; i++) {
       strings[i] = "eh";

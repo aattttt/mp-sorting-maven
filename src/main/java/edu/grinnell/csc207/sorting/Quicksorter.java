@@ -82,6 +82,6 @@ public class Quicksorter<T> implements Sorter<T> {
         current++;
       } // else
     } // while
-    return new int[] { lb, ub };
+    return new int[] {lb, ub};
   } // partition(T[], int, int)
 } // class Quicksorter

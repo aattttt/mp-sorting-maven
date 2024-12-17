@@ -56,9 +56,9 @@ public class SelectionSorter<T> implements Sorter<T> {
           temp = values[i];
           values[i] = values[smallest];
           values[smallest] = temp;
-        }
-      }
-    }
+        } // if
+      } // for
+    } // if
   } // sort(T[])
 
   /**
@@ -66,6 +66,8 @@ public class SelectionSorter<T> implements Sorter<T> {
    *
    * @param values the array to find the index in.
    * @param start  the index in the array the method will begin at.
+   *
+   * @return the index of the smallest element.
    */
   private int selectSmallest(T[] values, int start) {
     int smallest = start;

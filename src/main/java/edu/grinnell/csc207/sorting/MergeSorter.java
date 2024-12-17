@@ -66,6 +66,16 @@ public class MergeSorter<T> implements Sorter<T> {
     merge(leftside, rightside, values);
   } // sort(T[])
 
+  /**
+   * Merge two sub-arrays into a sorted array.
+   *
+   * @param leftside  one smaller sorted array.
+   *
+   * @param rightside one smaller sorted array.
+   *
+   * @param values    an array into which the sub arrays values will be placed.
+   *
+   */
   public void merge(T[] leftside, T[] rightside, T[] values) {
     int leftsideIndex = 0;
     int rightsideIndex = 0;
@@ -83,9 +93,11 @@ public class MergeSorter<T> implements Sorter<T> {
       mergedIndex++;
     } // while
     if (leftsideIndex < leftside.length) {
-      System.arraycopy(leftside, leftsideIndex, values, mergedIndex, leftside.length - leftsideIndex);
+      System.arraycopy(leftside, leftsideIndex, values,
+          mergedIndex, leftside.length - leftsideIndex);
     } else if (rightsideIndex < rightside.length) {
-      System.arraycopy(rightside, rightsideIndex, values, mergedIndex, rightside.length - rightsideIndex);
+      System.arraycopy(rightside, rightsideIndex, values,
+          mergedIndex, rightside.length - rightsideIndex);
     } // else
   } // merge(T[], T[], T[])
 } // class MergeSorter
